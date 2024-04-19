@@ -1,0 +1,6 @@
+__pycache__/
+.vscode/
+CollapseWeb/static/
+CollapseWeb/migrations/
+.env
+*.sqlite3
