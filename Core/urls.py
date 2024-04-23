@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from django.contrib.auth.models import User
-from CollapseWeb import serializers
+from CollapseWeb import views, serializers
 from . import settings
 
 urlpatterns = [
-    path('', include(serializers.router.urls)),
+    path('', views.index),
+    path('api/', include(serializers.router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
