@@ -78,15 +78,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-US'
 
 TIME_ZONE = 'UTC'
 
@@ -94,7 +92,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+TIME_ZONE = 'Europe/Kyiv'
+
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'CollapseWeb', 'static')
+
+MEDIA_URL = 'upload/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'CollapseWeb', 'upload')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

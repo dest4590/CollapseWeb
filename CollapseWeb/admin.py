@@ -11,7 +11,7 @@ class ClientAdmin(admin.ModelAdmin):
     def client_make_visible(modeladmin, request, queryset):
         queryset.update(hidden=False)
 
-    list_display = ('name', 'version', 'filename', 'internal', 'id')
+    list_display = ('name', 'version', 'filename', 'internal', 'id', 'created_at', 'updated_at')
     list_filter = ('version', )
     search_fields = ('name__startswith',)
     actions = [client_make_hidden, client_make_visible]

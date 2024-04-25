@@ -1,30 +1,207 @@
-:root{--fg: #cdd6f4;--bg: #1e1e2e;--gb-1: #252538;}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap');
+@import url('/static/css/webfont.css');
+
+:root {
+    /* Colors */
+    --fg: #cdd6f4;
+    --bg: #1e1e2e;
+    --bg-1: #252538;
+    --bg-2: #313244;
+    --link: #b4befe;
+
+    /* Transitions */
+    --eio: cubic-bezier(.45, 0, .2, 1);
+    --eio2: cubic-bezier(.45, 0, .2, 1);
+}
+
 body {
     background-color: #1e1e2e;
     font-family: "Readex Pro", sans-serif;
     margin: 0;
     padding: 0;
-    text-align: center;
-    color: var(--fg);
 }
+
+html {
+    scrollbar-color: var(--bg-2) var(--bg);
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+
 a {
-    color: var(--fg);
+    text-decoration: none;
 }
-.center {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+
+.header {
+    margin-top: 2rem;
+    text-align: center;
+    position: relative;
 }
-.center img {
+
+.header img {
+    width: 10rem;
     display: block;
     margin: 0 auto;
-    width: 200px;
-    cursor: pointer;
 }
-#endpoints {
-    margin-top: -1rem;
-    opacity: 0;
+
+.header h1 {
     position: relative;
-    transition: 500ms all cubic-bezier(.45,0,.2,1);
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: transparent;
+    animation: 1s infinite alternate-reverse headcolor;
+    font-family: monospace;
+    width: max-content;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 4cap;
+    transition: all 2s;
+    opacity: 0;
+}
+
+@keyframes headcolor {
+    from {
+        -webkit-text-stroke: 1px #cdd6f4;
+    }
+
+    to {
+        -webkit-text-stroke: 1px #b4befe;
+    }
+}
+
+.header h1:nth-child(1) {
+    margin-left: -1rem;
+}
+.header h1:nth-child(2) {
+    margin-left: -2rem;
+    top: 30%;
+}
+.header h1:nth-child(3) {
+    margin-left: -3rem;
+    top: 50%;
+}
+
+#commit-hash {
+    opacity: 0;
+    color: var(--fg);
+    font-size: larger;
+    transition: 500ms all var(--eio);
+}
+
+#commit-hash a {
+    color: var(--link);
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: max-content;
+    overflow: hidden;
+}
+
+.card {
+    margin-left: 2rem;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    width: min-content;
+    padding: 0.7rem;
+    min-width: 200px;
+    height: 15.3rem;
+    color: var(--fg);
+    background-color: var(--bg-1);
+    filter: blur(5px);
+    box-shadow: 0px 2px 5px 5px #18182559;
+    transition: height 400ms var(--eio2), margin-top 600ms var(--eio), filter 600ms var(--eio), transform 300ms;
+    overflow: hidden;
+    z-index: 7;
+}
+
+.card p {
+    font-family: Montserrat;
+    font-weight: 600;
+    width: 8rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
+}
+
+.badge {
+    background-color: var(--bg-2);
+    color: var(--fg);
+    padding: 0.2rem 0.7rem 0.2rem 0.7rem;
+    text-align: center;
+    border-radius: 999999rem;
+    margin-top: -2.4rem;
+    float: right;
+    z-index: 10;
+}
+
+.dl-btn {
+    background-color: var(--fg);
+    color: var(--bg);
+    border-radius: 999999rem;
+    padding: 0.3rem 1rem 0.3rem 1rem;
+    text-align: center;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: 0.3s;
+    width: 10rem;
+}
+
+.dl-btn a {
+    color: var(--bg);
+}
+
+.card:hover {
+    transform: scale(1.02);
+    height: 17.7rem;
+    overflow: hidden;
+
+    .dl-btn {
+        opacity: 1;
+    }
+}
+
+.card:active {
+    transform: scale(1);
+}
+
+.card img {
+    width: 200px;
+    height: 200px;
+}
+
+.client-image {
+    border-radius: 0.6rem;
+    z-index: 8;
+}
+
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
 }

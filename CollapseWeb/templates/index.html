@@ -3,25 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CollapseWeb - API</title>
+        <title>CollapseWeb</title>
 
         <link rel="stylesheet" href="/static/css/styles.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
-            
+
         <meta name="darkreader-lock">
 
         <script src="static/js/script.js"></script>
+        <script src="static/js/lenis.min.js"></script>
 
         <link rel="icon" type="image/x-icon" href="static/img/collapseweb.svg">
     </head>
 
     <body>
-        <div class="center">
-            <img src="static/img/collapseweb.svg" alt="CollapseWeb" id="logo" onclick="showEndpoints()">
-            <div id="endpoints">
-                <h3>Available API endpoints:</h3>
-                <a href="api/clients">clients/</a> - Clients list (used for loader)
-            </div>
+        <div class="header">
+            <h1>COLLAPSE WEB</h1>
+            <h1 style="color: var(--fg);">COLLAPSE WEB</h1>
+            <h1>COLLAPSE WEB</h1>
+        </div>
+
+        <div class="cards">
+            {% for client in clients %}
+                <div class="card">
+                    <img class="client-image" src="upload/{{ client.image }}">
+                    <p>{{ client.name }}</p>
+                    <span class="badge">{{ client.version }}</span>
+                    <p class="dl-btn"><i class="nf nf-fa-download"></i><span style="margin-right: 0.5rem;"></span><a href="https://cdn.collapseloader.org/{{ client.filename }}">Download</a></p>
+                </div>
+            {% endfor %}
         </div>
     </body>
 </html>
