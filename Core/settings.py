@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://api.collapseloader.org']
+CSRF_TRUSTED_ORIGINS = ['https://api.collapseloader.org', 'https://web.collapseloader.org']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
