@@ -1,36 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CollapseWeb</title>
 
-        <link rel="stylesheet" href="/static/css/styles.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CollapseWeb</title>
 
-        <meta name="darkreader-lock">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/hotline-miami.css">
 
-        <script src="static/js/script.js"></script>
-        <script src="static/js/lenis.min.js"></script>
+    <meta name="darkreader-lock">
 
-        <link rel="icon" type="image/x-icon" href="static/img/collapseweb.svg">
-    </head>
+    <script src="static/js/script.js"></script>
+    <script src="static/js/lenis.min.js"></script>
 
-    <body>
-        <div class="header">
-            <h1>COLLAPSE WEB</h1>
-            <h1 style="color: var(--fg);">COLLAPSE WEB</h1>
-            <h1>COLLAPSE WEB</h1>
+    <link rel="icon" type="image/x-icon" href="static/img/collapseweb.svg">
+
+    <meta name="description" content="web version of the loader, designed to simplify work with the server side">
+    <meta property="og:description" content="web version of the loader, designed to simplify work with the server side">
+    
+    <meta name="keywords" content="dest4590, collapseloader, collapseweb">
+    <meta name="author" content="dest4590">
+    <meta property="og:title" content="CollapseWeb">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://web.collapseloader.org">
+</head>
+
+<body>
+    <div class="header">
+        <div id="header-buttons">
+            <a href="/api">API</a>
+            {% if is_admin %}
+                <a href="/admin">Admin</a>
+            {% endif %}
         </div>
+        <h1 class="hotline-text" id="hl-text" can_hide="false">COLLAPSE WEB</h1>
+    </div>
 
-        <div class="cards">
-            {% for client in clients %}
-                <div class="card">
-                    <img class="client-image" src="upload/{{ client.image }}">
-                    <p>{{ client.name }}</p>
-                    <span class="badge">{{ client.version }}</span>
-                    <p class="dl-btn"><i class="nf nf-fa-download"></i><span style="margin-right: 0.5rem;"></span><a href="https://cdn.collapseloader.org/{{ client.filename }}">Download</a></p>
-                </div>
-            {% endfor %}
+    <div class="cards">
+        {% for client in clients %}
+        <div class="card">
+            <img class="client-image" src="upload/{{ client.image }}">
+            <p>{{ client.name }}</p>
+            <span class="badge">{{ client.version }}</span>
+            <p class="dl-btn"><i class="nf nf-fa-download"></i><span style="margin-right: 0.5rem;"></span><a
+                    href="https://cdn.collapseloader.org/{{ client.filename }}">Download</a></p>
         </div>
-    </body>
+        {% endfor %}
+    </div>
+</body>
+
 </html>

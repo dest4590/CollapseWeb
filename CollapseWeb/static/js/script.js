@@ -11,22 +11,10 @@ function animateCards() {
     }
 }
 
-function animateHeader(normal) {
-    var index = 0
+function animateHeader() {
+    var element = document.getElementById('hl-text')
 
-    for (const element of document.querySelectorAll('div.header > h1')) {
-        const timeout = 80 * (index++)
-
-        setTimeout(() => {
-            if (!normal) {
-                element.style.marginLeft = `${timeout / 80}rem`                
-            }
-            else {
-                element.style.marginLeft = `0rem` 
-            }
-            element.style.opacity = 1
-        }, timeout)
-    }
+    element.style.opacity = 1
 }
 
 function returnJSON(url, callback) {
@@ -45,7 +33,47 @@ function returnJSON(url, callback) {
 
     xhttp.open("GET", url);
     xhttp.send();
-  
+
+}
+
+function fadeOut() {
+    document.body.style.filter = 'blur(0px)'
+}
+
+var in_progress = false;
+
+function showButtons() {
+    var hl_text = document.getElementById('hl-text')
+    hl_text.style.marginLeft = '10rem'
+    hl_text.style.marginTop = '5rem'
+
+    if (hl_text.getAttribute('can_hide') == 'false' && !in_progress) {
+        in_progress = true
+
+        setTimeout(() => {
+            document.getElementById('header-buttons').style.opacity = 1
+    
+            setTimeout(() => {
+                hl_text.setAttribute('can_hide', true)
+                in_progress = false
+            }, 2000);
+        }, 700);
+    }
+
+    if (hl_text.getAttribute('can_hide') == 'true' && !in_progress) {
+        in_progress = true
+        
+        document.getElementById('header-buttons').style.opacity = 0
+        
+        setTimeout(() => {
+            hl_text.style.marginLeft = '0'
+            hl_text.style.marginTop = '3rem'
+            setTimeout(() => {
+                hl_text.setAttribute('can_hide', false)
+                in_progress = false
+            }, 2000);
+        }, 700);
+    }
 }
 
 window.onload = () => {
@@ -59,11 +87,15 @@ window.onload = () => {
     requestAnimationFrame(raf)
 
     setTimeout(() => {
-        animateHeader(false)
-        
+        document.getElementById('hl-text').style.animation = '3s ease-in-out infinite alternate pulse, headerWiggle 2s var(--eio2)'
+
+        animateHeader()
+        fadeOut()
+
         setTimeout(() => {
-            animateHeader(true)
-        }, 2000);
+            // set onclick attribute
+            document.getElementById('hl-text').setAttribute('onclick', 'showButtons()')
+        }, 2100);
 
         animateCards()
     }, 500);

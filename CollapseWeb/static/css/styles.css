@@ -15,27 +15,39 @@
     --eio2: cubic-bezier(.45, 0, .2, 1);
 }
 
-body {
-    background-color: #1e1e2e;
-    font-family: "Readex Pro", sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
 html {
     scrollbar-color: var(--bg-2) var(--bg);
     scrollbar-width: thin;
     scroll-behavior: smooth;
 }
 
+body {
+    background-color: #1e1e2e;
+    font-family: "Readex Pro", sans-serif;
+    overflow-x: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    filter: blur(7px);
+    transition: filter 700ms;
+}
+
+
 a {
     text-decoration: none;
 }
 
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
 .header {
-    margin-top: 2rem;
     text-align: center;
-    position: relative;
+    transition: opacity 300ms var(--eio);
 }
 
 .header img {
@@ -44,21 +56,23 @@ a {
     margin: 0 auto;
 }
 
-.header h1 {
-    position: relative;
-    top: 10%;
+#header-buttons {
+    display: ruby;
+    position: absolute;
     left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    color: transparent;
-    animation: 1s infinite alternate-reverse headcolor;
-    font-family: monospace;
-    width: max-content;
-    font-weight: 600;
-    font-style: italic;
-    font-size: 4cap;
-    transition: all 2s;
+    margin-top: -2.8rem;
+    margin-left: -7rem;
     opacity: 0;
+    transition: 400ms all var(--eio);
+}
+
+#header-buttons a {
+    font-size: 2cap;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0;
+    margin-left: 1rem;
+    cursor: pointer;
 }
 
 @keyframes headcolor {
@@ -71,43 +85,24 @@ a {
     }
 }
 
-.header h1:nth-child(1) {
-    margin-left: -1rem;
-}
-.header h1:nth-child(2) {
-    margin-left: -2rem;
-    top: 30%;
-}
-.header h1:nth-child(3) {
-    margin-left: -3rem;
-    top: 50%;
-}
-
-#commit-hash {
-    opacity: 0;
-    color: var(--fg);
-    font-size: larger;
-    transition: 500ms all var(--eio);
-}
-
-#commit-hash a {
-    color: var(--link);
-}
-
 .cards {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+
     margin-left: 1rem;
     margin-right: 1rem;
     height: max-content;
     overflow: hidden;
+    margin-bottom: 1rem;
 }
 
 .card {
     margin-left: 2rem;
-    margin-top: 2rem;
+    margin-top: 0.3rem;
+    margin-bottom: 1rem;
     border-radius: 1rem;
     width: min-content;
     padding: 0.7rem;
@@ -152,7 +147,9 @@ a {
     right: 0;
     opacity: 0;
     transition: 0.3s;
-    width: 10rem;
+    width: 7rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .dl-btn a {
@@ -160,12 +157,13 @@ a {
 }
 
 .card:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
     height: 17.7rem;
     overflow: hidden;
 
     .dl-btn {
         opacity: 1;
+        width: 10.5rem !important;
     }
 }
 
@@ -182,7 +180,6 @@ a {
     border-radius: 0.6rem;
     z-index: 8;
 }
-
 
 /* Lenis smooth scroll */
 html.lenis,
