@@ -4,7 +4,7 @@ from .models import Client
 class ClientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Client
-        fields = ['id', 'name', 'version', 'filename', 'main_class', 'internal']
+        fields = ['id', 'name', 'version', 'link']
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()

@@ -2,7 +2,7 @@ function animateCards() {
     var index = 0
 
     for (const element of document.querySelectorAll('div.card')) {
-        const timeout = 80 * (index++)
+        const timeout = 30 * (index++)
 
         setTimeout(() => {
             element.style.marginTop = '3rem'

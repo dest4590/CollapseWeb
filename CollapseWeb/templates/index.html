@@ -18,8 +18,8 @@
 
     <meta name="description" content="web version of the loader, designed to simplify work with the server side">
     <meta property="og:description" content="web version of the loader, designed to simplify work with the server side">
-    
-    <meta name="keywords" content="dest4590, collapseloader, collapseweb">
+
+    <meta name="keywords" content="dest4590, collapseloader, collapse loader, collapseweb, collapse web">
     <meta name="author" content="dest4590">
     <meta property="og:title" content="CollapseWeb">
     <meta property="og:type" content="website">
@@ -30,24 +30,21 @@
     <div class="header">
         <div id="header-buttons">
             <a href="/api">API</a>
-            {% if is_admin %}
-                <a href="/admin">Admin</a>
-            {% endif %}
+            <a href="/admin">Admin</a>
         </div>
+        
         <h1 class="hotline-text" id="hl-text" can_hide="false">COLLAPSE WEB</h1>
     </div>
 
     <div class="cards">
         {% for client in clients %}
-        <div class="card">
-            <img class="client-image" src="upload/{{ client.image }}">
-            <p>{{ client.name }}</p>
-            <span class="badge">{{ client.version }}</span>
-            <p class="dl-btn"><i class="nf nf-fa-download"></i><span style="margin-right: 0.5rem;"></span><a
-                    href="https://cdn.collapseloader.org/{{ client.filename }}">Download</a></p>
-        </div>
+            <div class="card">
+                <img class="client-image" src="upload/{{ client.image }}">
+                <p>{{ client.name }}</p>
+                <span class="badge">{{ client.version }}</span>
+                <a href="https://moneyz.fun/{{ client.link }}" target="_blank"><p class="dl-btn"><i class="nf nf-fa-download"></i><span style="margin-right: 0.5rem;"></span>Download</p></a>
+            </div>
         {% endfor %}
     </div>
 </body>
-
 </html>
