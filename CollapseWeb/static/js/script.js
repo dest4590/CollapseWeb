@@ -5,7 +5,7 @@ function animateCards() {
         const timeout = 30 * (index++)
 
         setTimeout(() => {
-            element.style.marginTop = '3rem'
+            element.style.marginTop = '1rem'
             element.style.filter = 'blur(0px)'
         }, timeout)
     }
@@ -40,28 +40,26 @@ function fadeOut() {
     document.body.style.filter = 'blur(0px)'
 }
 
-var in_progress = false;
-
 function showButtons() {
     var hl_text = document.getElementById('hl-text')
     hl_text.style.marginLeft = '10rem'
     hl_text.style.marginTop = '5rem'
 
-    if (hl_text.getAttribute('can_hide') == 'false' && !in_progress) {
-        in_progress = true
-
+    if (hl_text.getAttribute('can_hide') == 'false') {
+        document.getElementById('hl-text').setAttribute('onclick', '')
+        
         setTimeout(() => {
             document.getElementById('header-buttons').style.opacity = 1
-    
+            
             setTimeout(() => {
                 hl_text.setAttribute('can_hide', true)
-                in_progress = false
+                document.getElementById('hl-text').setAttribute('onclick', 'showButtons()')
             }, 2000);
         }, 700);
     }
 
-    if (hl_text.getAttribute('can_hide') == 'true' && !in_progress) {
-        in_progress = true
+    if (hl_text.getAttribute('can_hide') == 'true') {
+        document.getElementById('hl-text').setAttribute('onclick', '')
         
         document.getElementById('header-buttons').style.opacity = 0
         
@@ -70,14 +68,17 @@ function showButtons() {
             hl_text.style.marginTop = '3rem'
             setTimeout(() => {
                 hl_text.setAttribute('can_hide', false)
-                in_progress = false
+                document.getElementById('hl-text').setAttribute('onclick', 'showButtons()')
             }, 2000);
         }, 700);
     }
 }
 
 window.onload = () => {
-    const lenis = new Lenis()
+    const lenis = new Lenis({
+        duration: 1,
+        easing: (x) => x === 1 ? 1 : 1 - Math.pow(2, -10 * x)
+    })
 
     function raf(time) {
         lenis.raf(time)
