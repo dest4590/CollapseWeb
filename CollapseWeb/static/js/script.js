@@ -88,7 +88,7 @@ window.onload = () => {
     requestAnimationFrame(raf)
 
     setTimeout(() => {
-        document.getElementById('hl-text').style.animation = '3s ease-in-out infinite alternate pulse, headerWiggle 2s var(--eio2)'
+        document.getElementById('hl-text').style.animation = '3s ease-in-out infinite alternate pulse, headerWiggle 1s var(--eio2)'
 
         animateHeader()
         fadeOut()
@@ -96,7 +96,7 @@ window.onload = () => {
         setTimeout(() => {
             // set onclick attribute
             document.getElementById('hl-text').setAttribute('onclick', 'showButtons()')
-        }, 2100);
+        }, 1000);
 
         animateCards()
     }, 500);
