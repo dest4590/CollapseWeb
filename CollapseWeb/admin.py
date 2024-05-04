@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client
+from .models import Client, ClientLoader
 
 class ClientAdmin(admin.ModelAdmin):
     @admin.action(description='Mark selected clients as hidden')
@@ -17,3 +17,5 @@ class ClientAdmin(admin.ModelAdmin):
     actions = [client_make_hidden, client_make_visible]
 
 admin.site.register(Client, ClientAdmin)
+
+admin.site.register(ClientLoader)

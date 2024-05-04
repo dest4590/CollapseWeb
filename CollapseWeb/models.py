@@ -56,3 +56,21 @@ class Client(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+class ClientLoader(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(default='Client', max_length=250, help_text='client name')
+    version = models.CharField(default='1.16.5', max_length=250, help_text='client version, 1.12.2 or 1.16.5')
+    filename = models.CharField(default='Client.zip', help_text='zip name on <a href="https://cdn.collapseloader.org/">cdn</a>', max_length=250)
+    main_class = models.CharField(default='net.minecraft.client.main.Main', help_text='main class of jar', max_length=250)
+    show_in_loader = models.BooleanField(default=True, help_text='whether to show client in loader')
+    internal = models.BooleanField(default=False, help_text='whether the client will use its own libraries and natives')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.name} - {self.version}'
+    
+    class Meta:
+        verbose_name_plural = "Clients in loader"
+        ordering = ['-id']
