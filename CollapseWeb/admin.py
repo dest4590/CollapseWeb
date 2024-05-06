@@ -18,4 +18,19 @@ class ClientAdmin(admin.ModelAdmin):
 
 admin.site.register(Client, ClientAdmin)
 
+class ClientLoaderAdmin(admin.ModelAdmin):
+    @admin.action(description='Mark selected clients as hidden')
+    def client_make_hidden(modeladmin, request, queryset):
+        queryset.update(show_in_loader=False)
+
+
+    @admin.action(description='Mark selected clients as visible')
+    def client_make_visible(modeladmin, request, queryset):
+        queryset.update(show_in_loader=True)
+
+    list_display = ('name', 'version', 'filename', 'id', 'show_in_loader', 'working', 'internal')
+    list_filter = ('version', )
+    search_fields = ('name__startswith',)
+    actions = [client_make_hidden, client_make_visible]
+
 admin.site.register(ClientLoader)

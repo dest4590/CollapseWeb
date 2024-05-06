@@ -90,7 +90,7 @@ REST_FRAMEWORK = {
 }
 
 
-LANGUAGE_CODE = "ru-RU"
+LANGUAGE_CODE = "en-US"
 
 TIME_ZONE = "UTC"
 
