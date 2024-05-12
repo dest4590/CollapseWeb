@@ -54,7 +54,7 @@ function showButtons() {
             setTimeout(() => {
                 hl_text.setAttribute('can_hide', true)
                 document.getElementById('hl-text').setAttribute('onclick', 'showButtons()')
-            }, 2000);
+            }, 800);
         }, 700);
     }
 
