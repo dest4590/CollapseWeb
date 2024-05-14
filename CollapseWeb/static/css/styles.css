@@ -219,7 +219,7 @@ a {
   color: var(--fg);
   background-color: var(--bg-1);
   filter: blur(5px);
-  box-shadow: 0px 2px 5px 5px #18182559;
+  box-shadow: 0px 2px 5px 5px #18182540;
   transition: height 400ms var(--eio2), margin-top 600ms var(--eio), filter 600ms var(--eio), transform 300ms;
   overflow: hidden;
   z-index: 7;
