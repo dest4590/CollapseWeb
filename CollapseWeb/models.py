@@ -68,6 +68,7 @@ class ClientLoader(models.Model):
     internal = models.BooleanField(default=False, help_text='whether the client will use its own libraries and natives')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    category = models.CharField(default='HVH', help_text='category of cheat (type)', max_length=250)
 
     def __str__(self):
         return f"{self.name} - {self.version} [{'✅' if self.working else '❌'}]"

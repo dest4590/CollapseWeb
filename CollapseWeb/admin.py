@@ -28,9 +28,9 @@ class ClientLoaderAdmin(admin.ModelAdmin):
     def client_make_visible(modeladmin, request, queryset):
         queryset.update(show_in_loader=True)
 
-    list_display = ('name', 'version', 'filename', 'id', 'show_in_loader', 'working', 'internal')
+    list_display = ('name', 'version', 'category', 'filename', 'id', 'show_in_loader', 'working', 'internal')
     list_filter = ('version', )
     search_fields = ('name__startswith',)
     actions = [client_make_hidden, client_make_visible]
 
-admin.site.register(ClientLoader)
+admin.site.register(ClientLoader, ClientLoaderAdmin)
