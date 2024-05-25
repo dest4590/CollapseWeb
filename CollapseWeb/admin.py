@@ -16,7 +16,7 @@ class ClientAdmin(admin.ModelAdmin):
     search_fields = ('name__startswith',)
     actions = [client_make_hidden, client_make_visible]
 
-admin.site.register(Client, ClientAdmin)
+# admin.site.register(Client, ClientAdmin)
 
 class ClientLoaderAdmin(admin.ModelAdmin):
     @admin.action(description='Mark selected clients as hidden')
