@@ -1,4 +1,5 @@
 from django.contrib import admin
+from unfold.admin import ModelAdmin
 from .models import Client, ClientLoader
 
 class ClientAdmin(admin.ModelAdmin):
@@ -18,7 +19,7 @@ class ClientAdmin(admin.ModelAdmin):
 
 # admin.site.register(Client, ClientAdmin)
 
-class ClientLoaderAdmin(admin.ModelAdmin):
+class ClientLoaderAdmin(ModelAdmin):
     @admin.action(description='Mark selected clients as hidden')
     def client_make_hidden(modeladmin, request, queryset):
         queryset.update(show_in_loader=False)
