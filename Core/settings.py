@@ -91,6 +91,9 @@ REST_FRAMEWORK = {
     ],
 }
 
+UNFOLD = {
+    "THEME": "dark"
+}
 
 LANGUAGE_CODE = "en-US"
 
