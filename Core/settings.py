@@ -37,7 +37,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'csp.middleware.CSPMiddleware',
 ]
+
+CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'", "*")
+CSP_IMG_SRC = ("'self'", "'unsafe-inline'", "'unsafe-eval'", "*", "data:")
+
 
 ROOT_URLCONF = "Core.urls"
 
