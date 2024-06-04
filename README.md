@@ -7,4 +7,3 @@
 <h2 align=center>Features</h2>
 
 * [X] REST-API
-* [X] Web-App
