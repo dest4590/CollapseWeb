@@ -2,7 +2,7 @@
 
 <h1 align=center>CollapseWeb</h1>
 
-<h2 align=center>Our REST-API/Web-App for connecting the <a href="https://github.com/dest4590/CollapseLoader">loader</a> directly to the server side</h2>
+<h2 align=center>Our REST-API for connecting the <a href="https://github.com/dest4590/CollapseLoader">loader</a> directly to the server side</h2>
 
 <h2 align=center>Features</h2>
 
