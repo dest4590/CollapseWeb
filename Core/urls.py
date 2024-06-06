@@ -7,10 +7,10 @@ from CollapseWeb import serializers, views
 from .settings import MEDIA_ROOT, STATIC_ROOT
 
 urlpatterns = [
-    path('', views.api),
+    path('', views.index),
     path('admin/', admin.site.urls),
     
-    path('api/', views.api),
+    path('api/', views.index),
     path('api/', include(serializers.router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 

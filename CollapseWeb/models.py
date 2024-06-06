@@ -35,28 +35,6 @@ def image_file(instance, f):
     
     return filename
 
-class Client(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(default='Client', max_length=250, help_text='client name')
-    version = models.CharField(default='1.16.5', max_length=250, help_text='client version, 1.12.2 or 1.16.5')
-    link = models.CharField(default='sigma', help_text='moneyz link', max_length=250)
-    image = models.ImageField(upload_to=image_file, default='clients/image/unknown.webp')
-    hidden = models.BooleanField(default=False, help_text='whether to hide client in api')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def save(self, *args, **kwargs):
-        if self.image:
-            self.image.file = optimize_image(self.image.file, self.image.path)
-
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f'{self.name} - {self.version}'
-
-    class Meta:
-        ordering = ['-id']
-
 class ClientLoader(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(default='Client', max_length=250, help_text='client name')
@@ -75,4 +53,21 @@ class ClientLoader(models.Model):
     
     class Meta:
         verbose_name_plural = "Clients in loader"
+        ordering = ['-id']
+
+TYPE_CHOICES = (
+    ('info','Info'),
+    ('warn', 'Warn'),
+    ('maintenance','Maintenance')
+)
+
+class Message(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    body = models.TextField(default='Added new client', help_text='Body of message')
+    type = models.CharField(max_length=15, choices=TYPE_CHOICES, default='info')
+
+    post_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
         ordering = ['-id']

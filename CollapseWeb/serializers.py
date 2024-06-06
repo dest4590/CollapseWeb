@@ -1,5 +1,5 @@
 from rest_framework import routers, serializers, viewsets
-from .models import ClientLoader
+from .models import ClientLoader, Message
 
 class ClientLoaderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -13,5 +13,15 @@ class BaseClientViewSet(viewsets.ModelViewSet):
 class ClientViewSet(BaseClientViewSet):
     pass
 
+class MessagesSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Message
+        fields = ['id', 'body', 'type', 'post_at']
+
+class MessagesViewSet(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessagesSerializer
+
 router = routers.DefaultRouter()
 router.register(r'clients', ClientViewSet)
+router.register(r'messages', MessagesViewSet)

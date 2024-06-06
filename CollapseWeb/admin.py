@@ -1,6 +1,6 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin
-from .models import Client, ClientLoader
+from .models import ClientLoader, Message
 
 class ClientAdmin(admin.ModelAdmin):
     @admin.action(description='Mark selected clients as hidden')
@@ -16,8 +16,6 @@ class ClientAdmin(admin.ModelAdmin):
     list_filter = ('version', )
     search_fields = ('name__startswith',)
     actions = [client_make_hidden, client_make_visible]
-
-# admin.site.register(Client, ClientAdmin)
 
 class ClientLoaderAdmin(ModelAdmin):
     @admin.action(description='Mark selected clients as hidden')
@@ -35,3 +33,8 @@ class ClientLoaderAdmin(ModelAdmin):
     actions = [client_make_hidden, client_make_visible]
 
 admin.site.register(ClientLoader, ClientLoaderAdmin)
+
+class MessageAdmin(ModelAdmin):
+    pass
+
+admin.site.register(Message, MessageAdmin)
