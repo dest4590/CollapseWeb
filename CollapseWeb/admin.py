@@ -35,6 +35,6 @@ class ClientLoaderAdmin(ModelAdmin):
 admin.site.register(ClientLoader, ClientLoaderAdmin)
 
 class MessageAdmin(ModelAdmin):
-    pass
+    list_display = ('id', 'body')
 
 admin.site.register(Message, MessageAdmin)
