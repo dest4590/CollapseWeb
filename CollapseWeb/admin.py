@@ -35,6 +35,6 @@ class ClientLoaderAdmin(ModelAdmin):
 admin.site.register(ClientLoader, ClientLoaderAdmin)
 
 class MessageAdmin(ModelAdmin):
-    list_display = ('id', 'body')
+    list_display = ('id', 'type', 'body', 'hidden', 'post_at')
 
 admin.site.register(Message, MessageAdmin)

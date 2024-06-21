@@ -16,7 +16,7 @@ class ClientViewSet(BaseClientViewSet):
 class MessagesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Message
-        fields = ['id', 'body', 'type', 'post_at']
+        fields = ['id', 'body', 'type', 'post_at', 'hidden']
 
 class MessagesViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()

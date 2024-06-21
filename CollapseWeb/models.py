@@ -66,6 +66,7 @@ class Message(models.Model):
 
     body = models.TextField(default='Added new client', help_text='Body of message')
     type = models.CharField(max_length=15, choices=TYPE_CHOICES, default='info')
+    hidden = models.BooleanField(default=False, help_text='whether the message is hidden')
 
     post_at = models.DateTimeField(auto_now_add=True)
 
