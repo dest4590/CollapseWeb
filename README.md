@@ -6,4 +6,6 @@
 
 <h2 align=center>Features</h2>
 
+* [X] Clients & Messages
 * [X] REST-API
+* [X] Admin panel
