@@ -1,6 +1,7 @@
 __pycache__/
 .vscode/
-CollapseWeb/migrations/
+CollapseWeb/migrations/*
+!CollapseWeb/migrations/__init__.py
 CollapseWeb/static/rest_framework
 CollapseWeb/static/admin
 CollapseWeb/static/unfold
