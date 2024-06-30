@@ -31,6 +31,4 @@ ENV DJANGO_SUPERUSER_EMAIL=${ADMIN_EMAIL}
 
 RUN python manage.py createsuperuser --noinput
 
-RUN python create_secretkey.py
-
 CMD ["python", "manage.py", "runserver", "--insecure", "0.0.0.0:8000"]
