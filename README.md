@@ -9,3 +9,5 @@
 * [X] Clients & Messages
 * [X] REST-API
 * [X] Admin panel
+* [X] Docker Support
+* [X] Windows/Linux Support 
