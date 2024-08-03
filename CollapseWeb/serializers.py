@@ -1,5 +1,5 @@
 from rest_framework import routers, serializers, viewsets
-from .models import ClientLoader, Message
+from .models import ClientLoader, Message, Config
 
 class ClientLoaderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -22,6 +22,17 @@ class MessagesViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessagesSerializer
 
+class ConfigSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Config
+        fields = ['id', 'file', 'client', 'config_path']
+
+class ConfigViewSet(viewsets.ModelViewSet):
+    queryset = Config.objects.all()
+    serializer_class = ConfigSerializer
+
+
 router = routers.DefaultRouter()
 router.register(r'clients', ClientViewSet)
 router.register(r'messages', MessagesViewSet)
+router.register(r'configs', ConfigViewSet)

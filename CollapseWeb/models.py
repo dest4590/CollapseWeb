@@ -1,9 +1,12 @@
 import os
+from io import BytesIO
+
 from django.db import models
 from django.utils.safestring import mark_safe
 from PIL import Image
+
 from Core.settings import MEDIA_ROOT
-from io import BytesIO
+
 
 def optimize_image(image, filename):
     file_extension = os.path.splitext(os.path.basename(filename))[1]
@@ -72,3 +75,12 @@ class Message(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+class Config(models.Model):
+    id = models.AutoField(primary_key=True)
+    file = models.FileField(upload_to='config_files', help_text='client config file', max_length=250)
+    client = models.ForeignKey(ClientLoader, on_delete=models.CASCADE, help_text='client', related_name='config')
+    config_path = models.CharField(max_length=250, help_text='config path in client', default='configs/')
+
+    def __str__(self):
+        return f"{self.client.name} - {self.file}"
