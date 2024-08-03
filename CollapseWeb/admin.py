@@ -4,7 +4,7 @@ from unfold.admin import ModelAdmin
 from .models import ClientLoader, Config, Message
 
 
-class ClientAdmin(admin.ModelAdmin):
+class ClientAdmin(ModelAdmin):
     @admin.action(description='Mark selected clients as hidden')
     def client_make_hidden(modeladmin, request, queryset):
         queryset.update(hidden=True)
@@ -40,4 +40,8 @@ class MessageAdmin(ModelAdmin):
     list_display = ('id', 'type', 'body', 'hidden', 'post_at')
 
 admin.site.register(Message, MessageAdmin)
-admin.site.register(Config)
+
+class ConfigAdmin(ModelAdmin):
+    list_display = ('client', 'file', 'config_path')
+
+admin.site.register(Config, ConfigAdmin)
