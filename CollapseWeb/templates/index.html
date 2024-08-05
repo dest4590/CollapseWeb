@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CollapseWeb</title>
+
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+
+    <meta name="darkreader-lock">
+
+    <script src="/static/js/script.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="/static/img/collapseweb.svg">
+</head>
+
+<body>
+    <div class="header-links">
+        <a href="/api">API</a>
+        <a href="https://collapseloader.org">Website</a>
+    </div>
+
+    <h1>Clients</h1>
+
+    <div class="cards">
+        {% for client in clients %}
+            {% if client.show_in_loader %}
+                <div class="card" id="client-{{ client.id }}">
+                    <h3>{{ client.name }}</h3>
+                    <p>{{ client.version }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <h1>Configs</h1>
+
+    <div class="cards">
+        {% for config in configs %}
+            <div class="card" id="config-{{ config.id }}">
+                <p title="{{ config.filename }}">{{ config.filename }}</p>
+                <a href="#" onclick="highlightClient(event, '{{ config.client.id }}')">{{ config.client.name }}</a>
+                <a href="/upload/{{ config.file }}">Download</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -10,7 +10,7 @@ urlpatterns = [
     path('', views.index),
     path('admin/', admin.site.urls),
     
-    path('api/', views.index),
+    path('api/', views.api),
     path('api/', include(serializers.router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 

@@ -84,3 +84,7 @@ class Config(models.Model):
 
     def __str__(self):
         return f"{self.client.name} - {self.file}"
+    
+    @property
+    def filename(self):
+        return os.path.basename(self.file.name)
