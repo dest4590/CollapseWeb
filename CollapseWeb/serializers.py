@@ -25,7 +25,7 @@ class MessagesViewSet(viewsets.ModelViewSet):
 class ConfigSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Config
-        fields = ['id', 'file', 'client', 'config_path']
+        fields = ['id', 'file', 'client', 'config_path', 'server']
 
 class ConfigViewSet(viewsets.ModelViewSet):
     queryset = Config.objects.all()

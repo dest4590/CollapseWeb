@@ -79,6 +79,7 @@ class Message(models.Model):
 class Config(models.Model):
     id = models.AutoField(primary_key=True)
     file = models.FileField(upload_to='config_files', help_text='client config file', max_length=250)
+    server = models.CharField(max_length=250, help_text='server', default='-')
     client = models.ForeignKey(ClientLoader, on_delete=models.CASCADE, help_text='client', related_name='config')
     config_path = models.CharField(max_length=250, help_text='config path in client', default='configs/')
 

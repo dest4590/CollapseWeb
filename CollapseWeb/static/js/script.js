@@ -1,45 +1,35 @@
-document.addEventListener("DOMContentLoaded", function(){
-    setTimeout(() => {
-        animateCards()
-    }, 400);
+document.addEventListener("DOMContentLoaded", () => {
+    animateCards();
 });
 
-function animateCards() {
-    var index = 0
+async function animateCards() {
+    const cards = document.querySelectorAll('div.card');
 
-    for (const element of document.querySelectorAll('div.card')) {
-        const timeout = 20 * (index++)
-
-        setTimeout(() => {
-            element.style.filter = 'blur(0px)'
-        }, timeout)
-    }
+    await Promise.all(
+        Array.from(cards).map((card, index) => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    card.style.filter = 'blur(0px)';
+                    resolve();
+                }, 20 * index);
+            });
+        })
+    );
 }
 
-function getClientsId() {
-    var clients = []
-    for (const element of document.querySelectorAll('div.card')) {
-        if (element.id.startsWith('client-')) clients.push([element.id, element])
-    }
-    return clients
+function getItemsById(prefix) {
+    return Array.from(document.querySelectorAll(div.card[id ^= "${prefix}"])).map(
+        (element) => [element.id, element]
+    );
 }
 
-function getConfigs() {
-    var configs = []
-    for (const element of document.querySelectorAll('div.card')) {
-        if (element.id.startsWith('config-')) configs.push([element.id, element])
-    }
-    return configs
-}
-
-function highlightClient(event, clientId) {
+async function highlightClient(event, clientId) {
     event.preventDefault();
-    const target = document.querySelector(`#client-${clientId}`);
+    const target = document.getElementById(`client-${clientId}`);
     if (target) {
         target.classList.add('glow');
         target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => {
-            target.classList.remove('glow');
-        }, 1500);
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        target.classList.remove('glow');
     }
 }

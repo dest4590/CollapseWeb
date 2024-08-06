@@ -31,6 +31,7 @@
                 <div class="card" id="client-{{ client.id }}">
                     <h3>{{ client.name }}</h3>
                     <p>{{ client.version }}</p>
+                    <a href="https://cdn.collapseloader.org/{{ client.filename }}">Download</a>
                 </div>
             {% endif %}
         {% endfor %}
@@ -42,6 +43,9 @@
         {% for config in configs %}
             <div class="card" id="config-{{ config.id }}">
                 <p title="{{ config.filename }}">{{ config.filename }}</p>
+                {% if config.server != "-" %}
+                    <p title="{{ config.server }}">{{ config.server }}</p>
+                {% endif %}
                 <a href="#" onclick="highlightClient(event, '{{ config.client.id }}')">{{ config.client.name }}</a>
                 <a href="/upload/{{ config.file }}">Download</a>
             </div>
