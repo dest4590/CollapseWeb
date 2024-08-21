@@ -13,7 +13,9 @@ urlpatterns = [
     path('api/', views.api),
     path('api/', include(serializers.router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
+    path('api/analytics/start', views.analytics_start),
+    path('api/analytics/client', views.analytics_client),
+    
     re_path(r'^upload/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT})
 ]

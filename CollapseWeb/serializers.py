@@ -1,5 +1,7 @@
 from rest_framework import routers, serializers, viewsets
-from .models import ClientLoader, Message, Config
+
+from .models import ClientLoader, Config, Message
+
 
 class ClientLoaderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
