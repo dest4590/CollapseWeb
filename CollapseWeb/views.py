@@ -42,7 +42,7 @@ def analytics_client(request: WSGIRequest):
             embed = DiscordEmbed(title="Client run", description="", color="2b2bfb")
             embed.add_embed_field(name="Username", value=request.GET.get('username', 'None'))
             
-            client_id = request.GET.get('client-id', 0)
+            client_id = request.GET.get('client_id', 0)
             client = ClientLoader.objects.filter(id=client_id).first()
             
             if client:
