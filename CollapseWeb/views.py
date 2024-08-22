@@ -1,5 +1,5 @@
 import os
-
+from datetime import datetime
 from discord_webhook import DiscordEmbed, DiscordWebhook
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse
@@ -25,6 +25,7 @@ def analytics_start(request: WSGIRequest):
             webhook = DiscordWebhook(url=discord_webhook)
             embed = DiscordEmbed(title="Loader run", description="", color="902bfb")
             embed.add_embed_field(name="Version", value=request.GET.get('version', 'None'))
+            embed.add_embed_field(name="Timestamp", value=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             
             webhook.add_embed(embed)
             webhook.execute()
@@ -41,6 +42,7 @@ def analytics_client(request: WSGIRequest):
             webhook = DiscordWebhook(url=discord_webhook)
             embed = DiscordEmbed(title="Client run", description="", color="2b2bfb")
             embed.add_embed_field(name="Username", value=request.GET.get('username', 'None'))
+            embed.add_embed_field(name="Timestamp", value=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             
             client_id = request.GET.get('client_id', 0)
             client = ClientLoader.objects.filter(id=client_id).first()
