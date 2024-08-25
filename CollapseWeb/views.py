@@ -7,11 +7,14 @@ from django.shortcuts import render
 
 from .models import ClientLoader, Config
 
+def is_admin(request: WSGIRequest):
+    return request.user.is_superuser
 
 def index(request: WSGIRequest):
     return render(request, 'index.html', {
         'clients': ClientLoader.objects.all(),
-        'configs': Config.objects.all()
+        'configs': Config.objects.all(),
+        'is_admin': is_admin(request)
     })
 
 def api(request: WSGIRequest):
@@ -58,3 +61,8 @@ def analytics_client(request: WSGIRequest):
             return JsonResponse({'status': 'ok', 'message': 'Analytics data sent successfully'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
+        
+def handler404(request: WSGIRequest, exception):
+    response = render(request, "418.html")
+    response.status_code = 418
+    return response
