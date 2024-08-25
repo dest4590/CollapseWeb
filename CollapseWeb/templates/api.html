@@ -1,32 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CollapseWeb</title>
+{% block title %}API{% endblock %}
+{% block additionals %}
+<script src="/static/js/api.js"></script>
+<link rel="stylesheet" href="/static/css/api.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+{% endblock %}
 
-    <link rel="stylesheet" href="/static/css/api.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
-
-    <meta name="darkreader-lock">
-
-    <script src="/static/js/api.js"></script>
-
-    <link rel="icon" type="image/x-icon" href="/static/img/collapseweb.svg">
-</head>
-
-<body>
-    <div class="center">
-        <img src="/static/img/collapseweb.svg" alt="CollapseWeb" id="logo">
-        <div id="endpoints">
-            <h3>Available API endpoints:</h3>
-            <a href="/api/clients">clients/</a> - Clients list (used for loader)</br>
-            <a href="/api/messages">messages/</a> - Messages list (used for alerting in loader)</br>
-            <a href="/api/configs">configs/</a> - Config list (used for clients)</br>
-            <a href="/admin">admin/</a> - Admin panel
-        </div>
+{% block content %}
+<div class="center">
+    <img src="/static/img/collapseweb.svg" alt="CollapseWeb" id="logo">
+    <div id="endpoints">
+        <h3>Available API endpoints:</h3>
+        <a href="/api/clients">clients/</a> - Clients list (used for loader)</br>
+        <a href="/api/configs">configs/</a> - Config list (used for clients)</br>
+        <a href="/api/messages">messages/</a> - Messages list (used for alerting in loader)</br>
+        <a href="/admin">admin/</a> - Admin panel
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

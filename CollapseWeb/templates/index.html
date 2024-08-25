@@ -1,31 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CollapseWeb</title>
+{% block title %}Home{% endblock %}
 
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
-
-    <meta name="darkreader-lock">
-
-    <script src="/static/js/script.js"></script>
-
-    <link rel="icon" type="image/x-icon" href="/static/img/collapseweb.svg">
-</head>
-
-<body>
-    <div class="header-links">
-        <a href="/api">API</a>
-        <a href="https://collapseloader.org">Website</a>
-    </div>
-
-    <h1>Clients</h1>
-
-    <div class="cards">
+{% block content %}
+<h1>Clients</h1>
+<div class="cards">
+    {% if clients|length == 0 %}
+        <p>No clients available.</p>
+    {% else %}
         {% for client in clients %}
             {% if client.show_in_loader %}
                 <div class="card" id="client-{{ client.id }}">
@@ -35,11 +17,14 @@
                 </div>
             {% endif %}
         {% endfor %}
-    </div>
+    {% endif %}
+</div>
 
-    <h1>Configs</h1>
-
-    <div class="cards">
+<h1>Configs</h1>
+<div class="cards">
+    {% if configs|length == 0 %}
+        <p>No configs available.</p>
+    {% else %}
         {% for config in configs %}
             <div class="card" id="config-{{ config.id }}">
                 <p title="{{ config.filename }}">{{ config.filename }}</p>
@@ -50,7 +35,6 @@
                 <a href="/upload/{{ config.file }}">Download</a>
             </div>
         {% endfor %}
-    </div>
-</body>
-
-</html>
+    {% endif %}
+</div>
+{% endblock %}
