@@ -20,4 +20,4 @@ urlpatterns = [
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT})
 ]
 
-handler404 = 'CollapseWeb.views.handler404'
+#handler404 = 'CollapseWeb.views.handler404'
