@@ -23,6 +23,9 @@ def api(request: WSGIRequest):
 def analytics_start(request: WSGIRequest):
     if DISCORD_WEBHOOK_START:
         try:
+            if request.GET.get('version', None) is None:
+                return JsonResponse({'status': 'error', 'message': 'Version not set'}, status=400)
+            
             webhook = DiscordWebhook(url=DISCORD_WEBHOOK_START)
             embed = DiscordEmbed(title="Loader run", description="", color="902bfb")
             embed.add_embed_field(name="Version", value=request.GET.get('version', 'None'))
@@ -31,7 +34,7 @@ def analytics_start(request: WSGIRequest):
             webhook.add_embed(embed)
             webhook.execute()
             
-            return JsonResponse({'status': 'ok', 'message': 'Analytics data sent successfully'})
+            return JsonResponse({'status': 'success', 'message': 'Analytics data sent successfully'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     else:
@@ -40,6 +43,12 @@ def analytics_start(request: WSGIRequest):
 def analytics_client(request: WSGIRequest):
     if DISCORD_WEBHOOK_CLIENT:
         try:
+            if request.GET.get('username', None) is None:
+                return JsonResponse({'status': 'error', 'message': 'Username not set'}, status=400)
+            
+            if request.GET.get('client_id', None) is None:
+                return JsonResponse({'status': 'error', 'message': 'Client ID not set'}, status=400)
+        
             webhook = DiscordWebhook(url=DISCORD_WEBHOOK_CLIENT)
             embed = DiscordEmbed(title="Client run", description="", color="2b2bfb")
             embed.add_embed_field(name="Username", value=request.GET.get('username', 'None'))
@@ -56,7 +65,7 @@ def analytics_client(request: WSGIRequest):
             webhook.add_embed(embed)
             webhook.execute()
             
-            return JsonResponse({'status': 'ok', 'message': 'Analytics data sent successfully'})
+            return JsonResponse({'status': 'success', 'message': 'Analytics data sent successfully'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     else:
