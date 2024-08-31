@@ -91,9 +91,14 @@ REST_FRAMEWORK = {
     ],
 }
 
+# Custom settings
+
 UNFOLD = {
     "THEME": "dark"
 }
+
+DISCORD_WEBHOOK_START = os.getenv("DISCORD_WEBHOOK_START")
+DISCORD_WEBHOOK_CLIENT = os.getenv("DISCORD_WEBHOOK_CLIENT")
 
 LANGUAGE_CODE = "en-US"
 
