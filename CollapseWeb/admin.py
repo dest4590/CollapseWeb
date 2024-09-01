@@ -13,7 +13,7 @@ class ClientAdmin(ModelAdmin):
     def client_make_visible(modeladmin, _, queryset):
         queryset.update(show_in_loader=True)
 
-    list_display = ('name', 'version', 'category', 'filename', 'id', 'show_in_loader', 'working', 'internal')
+    list_display = ('name', 'version', 'filename', 'id', 'show_in_loader', 'working', 'internal')
     list_filter = ('version', )
     search_fields = ('name__startswith',)
     actions = [client_make_hidden, client_make_visible]
