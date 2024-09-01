@@ -48,6 +48,7 @@ class Client(models.Model):
     working = models.BooleanField(default=True, help_text='whether the client is running')
     internal = models.BooleanField(default=False, help_text='whether the client will use its own libraries and natives')
     fabric = models.BooleanField(default=False, help_text='whether the client is a fabric client')
+    category = models.CharField(default='HVH', max_length=250, help_text='client category')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -66,6 +67,7 @@ class FabricClient(models.Model):
     show_in_loader = models.BooleanField(default=True, help_text='whether the client is shown in loader')
     working = models.BooleanField(default=True, help_text='whether the client is running')
     fabric = models.BooleanField(default=True, help_text='whether the client is a fabric client')
+    category = models.CharField(default='HVH', max_length=250, help_text='client category')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
