@@ -38,11 +38,11 @@ def image_file(instance, f):
     
     return filename
 
-class ClientLoader(models.Model):
+class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(default='Client', max_length=250, help_text='client name')
     version = models.CharField(default='1.16.5', max_length=250, help_text='client version, 1.12.2 or 1.16.5')
-    filename = models.CharField(default='Client.zip', help_text='zip name on <a href="https://cdn.collapseloader.org/">cdn</a>', max_length=250)
+    filename = models.CharField(default='Client.jar', help_text='client filename on cdn', max_length=250)
     main_class = models.CharField(default='net.minecraft.client.main.Main', help_text='main class of jar', max_length=250)
     show_in_loader = models.BooleanField(default=True, help_text='show the client in loader?')
     working = models.BooleanField(default=True, help_text='whether the client is running')
@@ -52,10 +52,28 @@ class ClientLoader(models.Model):
     category = models.CharField(default='HVH', help_text='category of cheat (type)', max_length=250)
 
     def __str__(self):
-        return f"{self.name} - {self.version} [{'✅' if self.working else '❌'}]"
+        return f"{self.name} - {self.version}"
     
     class Meta:
         verbose_name_plural = "Clients in loader"
+        ordering = ['-id']
+
+class FabricClient(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(default='Fabric Client', max_length=250, help_text='client name')
+    version = models.CharField(default='1.21', max_length=250, help_text='client version, 1.12.2 or 1.16.5')
+    filename = models.CharField(default='Client.jar', help_text='mod filename on cdn', max_length=250)
+    show_in_loader = models.BooleanField(default=True, help_text='show the client in loader?')
+    working = models.BooleanField(default=True, help_text='whether the client is running')
+    hidden = models.BooleanField(default=False, help_text='whether the client is hidden')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.name} - {self.version}"
+    
+    class Meta:
+        verbose_name_plural = "Fabric Clients in loader"
         ordering = ['-id']
 
 TYPE_CHOICES = (
@@ -80,7 +98,7 @@ class Config(models.Model):
     id = models.AutoField(primary_key=True)
     file = models.FileField(upload_to='config_files', help_text='client config file', max_length=250)
     server = models.CharField(max_length=250, help_text='server', default='-')
-    client = models.ForeignKey(ClientLoader, on_delete=models.CASCADE, help_text='client', related_name='config')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, help_text='client', related_name='config')
     config_path = models.CharField(max_length=250, help_text='config path in client', default='configs/')
 
     def __str__(self):

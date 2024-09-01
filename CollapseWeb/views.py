@@ -1,18 +1,22 @@
 import os
 from datetime import datetime
+
 from discord_webhook import DiscordEmbed, DiscordWebhook
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import JsonResponse
 from django.shortcuts import render
-from Core.settings import DISCORD_WEBHOOK_START, DISCORD_WEBHOOK_CLIENT 
-from .models import ClientLoader, Config
+
+from Core.settings import DISCORD_WEBHOOK_CLIENT, DISCORD_WEBHOOK_START
+
+from .models import Client, Config
+
 
 def is_admin(request: WSGIRequest):
     return request.user.is_superuser
 
 def index(request: WSGIRequest):
     return render(request, 'index.html', {
-        'clients': ClientLoader.objects.all(),
+        'clients': Client.objects.all(),
         'configs': Config.objects.all(),
         'is_admin': is_admin(request)
     })
@@ -55,7 +59,7 @@ def analytics_client(request: WSGIRequest):
             embed.add_embed_field(name="Timestamp", value=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             
             client_id = request.GET.get('client_id', 0)
-            client = ClientLoader.objects.filter(id=client_id).first()
+            client = Client.objects.filter(id=client_id).first()
             
             if client:
                 embed.add_embed_field(name="Client", value=client.name)

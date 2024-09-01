@@ -1,19 +1,25 @@
 from rest_framework import routers, serializers, viewsets
 
-from .models import ClientLoader, Config, Message
+from .models import *
 
 
-class ClientLoaderSerializer(serializers.HyperlinkedModelSerializer):
+class ClientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = ClientLoader
+        model = Client
         fields = ['id', 'name', 'version', 'category', 'filename', 'main_class', 'show_in_loader', 'working', 'internal', 'created_at', 'updated_at']
 
-class BaseClientViewSet(viewsets.ModelViewSet):
-    queryset = ClientLoader.objects.all()
-    serializer_class = ClientLoaderSerializer
+class ClientViewSet(viewsets.ModelViewSet):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
 
-class ClientViewSet(BaseClientViewSet):
-    pass
+class FabricClientSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = FabricClient
+        fields = ['id', 'name', 'version', 'filename', 'show_in_loader', 'working', 'hidden', 'created_at', 'updated_at']
+
+class FabricClientViewSet(viewsets.ModelViewSet):
+    queryset = FabricClient.objects.all()
+    serializer_class = FabricClientSerializer
 
 class MessagesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -33,8 +39,8 @@ class ConfigViewSet(viewsets.ModelViewSet):
     queryset = Config.objects.all()
     serializer_class = ConfigSerializer
 
-
 router = routers.DefaultRouter()
 router.register(r'clients', ClientViewSet)
+router.register(r'fabric_clients', FabricClientViewSet)
 router.register(r'messages', MessagesViewSet)
 router.register(r'configs', ConfigViewSet)
