@@ -24,21 +24,23 @@ def api(request: WSGIRequest):
     return render(request, 'api.html')
 
 def analytics_start(request: WSGIRequest):
-    counter, _ = AnalyticsCounter.objects.get_or_create(endpoint='api/analytics/start')
-    counter.count += 1
-    counter.save()
+
 
     if DISCORD_WEBHOOK_START:
         try:
             if request.GET.get('version', None) is None:
                 return JsonResponse({'status': 'error', 'message': 'Version not set'}, status=400)
             
+            counter, _ = AnalyticsCounter.objects.get_or_create(endpoint='api/analytics/start')
+            counter.count += 1
+            counter.save()
+            
             webhook = DiscordWebhook(url=DISCORD_WEBHOOK_START)
             embed = DiscordEmbed(title="Loader run", description="", color="902bfb")
             embed.add_embed_field(name="Version", value=request.GET.get('version', 'None'))
             embed.add_embed_field(name="Timestamp", value=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             embed.add_embed_field(name="Start counter", value=str(counter.count))
-            
+
             webhook.add_embed(embed)
             webhook.execute()
             
@@ -49,10 +51,6 @@ def analytics_start(request: WSGIRequest):
         return JsonResponse({'status': 'error', 'message': 'Webhook not set'}, status=500)
 
 def analytics_client(request: WSGIRequest):
-    counter, _ = AnalyticsCounter.objects.get_or_create(endpoint='api/analytics/client')
-    counter.count += 1
-    counter.save()
-    
     if DISCORD_WEBHOOK_CLIENT:
         try:
             if request.GET.get('username', None) is None:
@@ -60,6 +58,10 @@ def analytics_client(request: WSGIRequest):
             
             if request.GET.get('client_id', None) is None:
                 return JsonResponse({'status': 'error', 'message': 'Client ID not set'}, status=400)
+
+            counter, _ = AnalyticsCounter.objects.get_or_create(endpoint='api/analytics/client')
+            counter.count += 1
+            counter.save()
         
             webhook = DiscordWebhook(url=DISCORD_WEBHOOK_CLIENT)
             embed = DiscordEmbed(title="Client run", description="", color="2b2bfb")
@@ -74,7 +76,7 @@ def analytics_client(request: WSGIRequest):
                 embed.add_embed_field(name="Client", value=client.name)
             else:
                 embed.add_embed_field(name="Client", value="None")
-            
+
             webhook.add_embed(embed)
             webhook.execute()
             
