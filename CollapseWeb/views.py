@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 
 from discord_webhook import DiscordEmbed, DiscordWebhook
@@ -8,7 +7,7 @@ from django.shortcuts import render
 
 from Core.settings import DISCORD_WEBHOOK_CLIENT, DISCORD_WEBHOOK_START
 
-from .models import Client, Config
+from .models import AnalyticsCounter, Client, Config
 
 
 def is_admin(request: WSGIRequest):
@@ -25,6 +24,10 @@ def api(request: WSGIRequest):
     return render(request, 'api.html')
 
 def analytics_start(request: WSGIRequest):
+    counter, _ = AnalyticsCounter.objects.get_or_create(endpoint='api/analytics/start')
+    counter.count += 1
+    counter.save()
+
     if DISCORD_WEBHOOK_START:
         try:
             if request.GET.get('version', None) is None:
@@ -34,6 +37,7 @@ def analytics_start(request: WSGIRequest):
             embed = DiscordEmbed(title="Loader run", description="", color="902bfb")
             embed.add_embed_field(name="Version", value=request.GET.get('version', 'None'))
             embed.add_embed_field(name="Timestamp", value=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            embed.add_embed_field(name="Start counter", value=str(counter.count))
             
             webhook.add_embed(embed)
             webhook.execute()
@@ -45,6 +49,10 @@ def analytics_start(request: WSGIRequest):
         return JsonResponse({'status': 'error', 'message': 'Webhook not set'}, status=500)
 
 def analytics_client(request: WSGIRequest):
+    counter, _ = AnalyticsCounter.objects.get_or_create(endpoint='api/analytics/client')
+    counter.count += 1
+    counter.save()
+    
     if DISCORD_WEBHOOK_CLIENT:
         try:
             if request.GET.get('username', None) is None:
@@ -57,6 +65,7 @@ def analytics_client(request: WSGIRequest):
             embed = DiscordEmbed(title="Client run", description="", color="2b2bfb")
             embed.add_embed_field(name="Username", value=request.GET.get('username', 'None'))
             embed.add_embed_field(name="Timestamp", value=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            embed.add_embed_field(name="Client counter", value=str(counter.count))
             
             client_id = request.GET.get('client_id', 0)
             client = Client.objects.filter(id=client_id).first()

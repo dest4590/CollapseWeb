@@ -109,3 +109,7 @@ class Config(models.Model):
     @property
     def filename(self):
         return os.path.basename(self.file.name)
+
+class AnalyticsCounter(models.Model):
+    endpoint = models.CharField(max_length=200, unique=True)
+    count = models.IntegerField(default=0)

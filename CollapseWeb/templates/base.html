@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +11,22 @@
     <link rel="icon" type="image/x-icon" href="{% static 'img/collapseweb.svg' %}">
 
     <meta name="darkreader-lock">
-    
+
     {% block additionals %}{% endblock %}
 </head>
+
 <body>
     <div class="header-links">
         <a href="{% url 'index' %}">Home</a>
         <a href="{% url 'api' %}">API</a>
         <a href="https://collapseloader.org">Website</a>
         {% if is_admin %}
-            <a href="{% url 'admin:index' %}">Admin</a>
+        <a href="{% url 'admin:index' %}">Admin</a>
         {% endif %}
     </div>
     <main>
         {% block content %}{% endblock %}
     </main>
 </body>
+
 </html>
