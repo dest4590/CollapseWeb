@@ -31,9 +31,11 @@ class MessagesViewSet(viewsets.ModelViewSet):
     serializer_class = MessagesSerializer
 
 class ConfigSerializer(serializers.ModelSerializer):
+    client_name = serializers.CharField(source='client.name', read_only=True)
+
     class Meta:
         model = Config
-        fields = ['id', 'file', 'client', 'config_path', 'server']
+        fields = ['id', 'file', 'client', 'client_name', 'config_path', 'server']
 
 class ConfigViewSet(viewsets.ModelViewSet):
     queryset = Config.objects.all()
