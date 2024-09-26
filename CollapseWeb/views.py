@@ -2,12 +2,12 @@ from datetime import datetime
 
 from discord_webhook import DiscordEmbed, DiscordWebhook
 from django.core.handlers.wsgi import WSGIRequest
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 
 from Core.settings import DISCORD_WEBHOOK_CLIENT, DISCORD_WEBHOOK_START
 
-from .models import AnalyticsCounter, Client, Config
+from .models import AnalyticsCounter, Client, Config, CreditsText
 
 
 def is_admin(request: WSGIRequest):
@@ -24,8 +24,6 @@ def api(request: WSGIRequest):
     return render(request, 'api.html')
 
 def analytics_start(request: WSGIRequest):
-
-
     if DISCORD_WEBHOOK_START:
         try:
             if request.GET.get('version', None) is None:
@@ -85,8 +83,6 @@ def analytics_client(request: WSGIRequest):
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
     else:
         return JsonResponse({'status': 'error', 'message': 'Webhook not set'}, status=500)
-    
-def handler404(request: WSGIRequest, exception):
-    response = render(request, "418.html")
-    response.status_code = 418
-    return response
+
+def credits(request: WSGIRequest):
+    return HttpResponse(CreditsText.objects.first().text)

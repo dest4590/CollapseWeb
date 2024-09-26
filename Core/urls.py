@@ -16,6 +16,9 @@ urlpatterns = [
     path('api/analytics/start', views.analytics_start),
     path('api/analytics/client', views.analytics_client),
     
+    # loader essentials
+    path('credits/', views.credits, name='credits'),
+    
     re_path(r'^upload/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT})
 ]

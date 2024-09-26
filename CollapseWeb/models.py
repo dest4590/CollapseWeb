@@ -56,7 +56,7 @@ class Client(models.Model):
         return f"{self.name} - {self.version}"
     
     class Meta:
-        verbose_name_plural = "Clients in loader"
+        verbose_name_plural = "Clients"
         ordering = ['-id']
 
 class FabricClient(models.Model):
@@ -75,7 +75,7 @@ class FabricClient(models.Model):
         return f"{self.name} - {self.version}"
     
     class Meta:
-        verbose_name_plural = "Fabric Clients in loader"
+        verbose_name_plural = "Fabric Clients"
         ordering = ['-id']
 
 TYPE_CHOICES = (
@@ -113,3 +113,12 @@ class Config(models.Model):
 class AnalyticsCounter(models.Model):
     endpoint = models.CharField(max_length=200, unique=True)
     count = models.IntegerField(default=0)
+    
+class CreditsText(models.Model):
+    text = models.TextField()
+    
+    def __str__(self):
+        return f"{self.text[:50]}..."
+    
+    class Meta:
+        verbose_name_plural = "Credits Text"
