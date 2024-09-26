@@ -1,9 +1,14 @@
 {% extends "base.html" %}
+{% load compress %}
 
 {% block title %}Home{% endblock %}
 
 {% block additionals %}
-<script src="/static/js/script.js"></script>
+
+{% compress js %}
+<script type="text/javascript" src="/static/js/script.js"></script>
+{% endcompress %}
+
 {% endblock %}
 
 {% block content %}

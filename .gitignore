@@ -8,3 +8,4 @@ CollapseWeb/static/unfold
 CollapseWeb/upload
 .env
 *.sqlite3
+CACHE/

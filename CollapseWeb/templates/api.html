@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
+{% load compress %}
 
 {% block title %}API{% endblock %}
 {% block additionals %}
-<script src="/static/js/api.js"></script>
+
+{% compress js %}
+<script type="text/javascript" src="/static/js/api.js"></script>
+{% endcompress %}
+
+{% compress css %}
 <link rel="stylesheet" href="/static/css/api.css">
+{% endcompress %}
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+
 {% endblock %}
 
 {% block content %}
