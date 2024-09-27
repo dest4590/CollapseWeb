@@ -9,6 +9,8 @@
 <script type="text/javascript" src="/static/js/script.js"></script>
 {% endcompress %}
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
+
 {% endblock %}
 
 {% block content %}
@@ -17,6 +19,7 @@
     {% if clients|length == 0 %}
     <p>No clients available.</p>
     {% else %}
+
     {% for client in clients %}
     {% if client.show_in_loader %}
     <div class="card" id="client-{{ client.id }}">

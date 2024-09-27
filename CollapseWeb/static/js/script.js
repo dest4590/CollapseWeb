@@ -1,24 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     animateCards();
 });
-
 async function animateCards() {
     const cards = document.querySelectorAll('div.card');
 
-    await Promise.all(
-        Array.from(cards).map((card, index) => {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    card.style.filter = 'blur(0px)';
-                    resolve();
-                }, 20 * index);
-            });
-        })
-    );
+    for (let i = 0; i < cards.length; i++) {
+        setTimeout(() => {
+            cards[i].classList.add('show');
+        }, i * 50);
+    }
 }
 
 function getItemsById(prefix) {
-    return Array.from(document.querySelectorAll(div.card[id ^= "${prefix}"])).map(
+    return Array.from(document.querySelectorAll(`div.card[id^="${prefix}"]`)).map(
         (element) => [element.id, element]
     );
 }

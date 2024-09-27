@@ -1,11 +1,12 @@
 :root {
-    --fg: #cdd6f4;
-    --bg: #1e1e2e;
-    --gb-1: #252538;
+    --fg: #e0def4;
+    --surface: #4c566a;
+    --bg: #2e3440;
+    --gb-1: #3b4252;
 }
 
 body {
-    background-color: #1e1e2e;
+    background-color: var(--bg);
     font-family: "Readex Pro", sans-serif;
     margin: 0;
     padding: 0;
