@@ -2,7 +2,7 @@ from datetime import datetime
 
 from discord_webhook import DiscordEmbed, DiscordWebhook
 from django.core.handlers.wsgi import WSGIRequest
-from django.http import JsonResponse, HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from Core.settings import DISCORD_WEBHOOK_CLIENT, DISCORD_WEBHOOK_START
@@ -85,4 +85,9 @@ def analytics_client(request: WSGIRequest):
         return JsonResponse({'status': 'error', 'message': 'Webhook not set'}, status=500)
 
 def credits(request: WSGIRequest):
-    return HttpResponse(CreditsText.objects.first().text)
+    language = request.GET.get('lang', 'en')
+    credits_text = CreditsText.objects.filter(language=language).first()
+    if credits_text:
+        return HttpResponse(credits_text.text)
+    else:
+        return HttpResponse("Credits text not available in the requested language")

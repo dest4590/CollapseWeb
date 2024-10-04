@@ -3,6 +3,7 @@ from io import BytesIO
 
 from django.db import models
 from django.utils.safestring import mark_safe
+from django.utils.translation import get_language
 from PIL import Image
 
 from Core.settings import MEDIA_ROOT
@@ -113,12 +114,13 @@ class Config(models.Model):
 class AnalyticsCounter(models.Model):
     endpoint = models.CharField(max_length=200, unique=True)
     count = models.IntegerField(default=0)
-    
+
 class CreditsText(models.Model):
     text = models.TextField()
-    
+    language = models.CharField(max_length=10, default='en')
+
     def __str__(self):
         return f"{self.text[:50]}..."
-    
+
     class Meta:
         verbose_name_plural = "Credits Text"
