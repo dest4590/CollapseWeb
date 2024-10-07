@@ -36,6 +36,7 @@ def analytics_start(request: WSGIRequest):
             webhook = DiscordWebhook(url=DISCORD_WEBHOOK_START)
             embed = DiscordEmbed(title="Loader run", description="", color="902bfb")
             embed.add_embed_field(name="Version", value=request.GET.get('version', 'None'))
+            embed.add_embed_field(name="Enabled args", value=request.GET.get('enabled_args', 'None'))
             embed.add_embed_field(name="Timestamp", value=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
             embed.add_embed_field(name="Start counter", value=str(counter.count))
 
