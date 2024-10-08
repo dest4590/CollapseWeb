@@ -18,6 +18,7 @@ urlpatterns = [
     
     # loader essentials
     path('credits/', views.credits, name='credits'),
+    path('header/', views.header, name='header'),
     
     re_path(r'^upload/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT})

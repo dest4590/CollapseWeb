@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 from Core.settings import DISCORD_WEBHOOK_CLIENT, DISCORD_WEBHOOK_START
 
-from .models import AnalyticsCounter, Client, Config, CreditsText
+from .models import *
 
 
 def is_admin(request: WSGIRequest):
@@ -92,3 +92,12 @@ def credits(request: WSGIRequest):
         return HttpResponse(credits_text.text)
     else:
         return HttpResponse("Credits text not available in the requested language")
+    
+def header(request: WSGIRequest):
+    language = request.GET.get('lang', 'en')
+    header_text = HeaderText.objects.filter(language=language).first()
+    
+    if header_text:
+        return HttpResponse(header_text.line)
+    else:
+        return HttpResponse("Header text not available in the requested language")

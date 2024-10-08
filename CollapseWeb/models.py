@@ -124,3 +124,13 @@ class CreditsText(models.Model):
 
     class Meta:
         verbose_name_plural = "Credits Text"
+        
+class HeaderText(models.Model):
+    line = models.CharField(max_length=100)
+    language = models.CharField(max_length=10, default='en')
+    
+    def __str__(self):
+        return f"{self.line[:50]}..."
+    
+    class Meta:
+        verbose_name_plural = "Header Text"
