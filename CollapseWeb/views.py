@@ -88,10 +88,11 @@ def analytics_client(request: WSGIRequest):
 def credits(request: WSGIRequest):
     language = request.GET.get('lang', 'en')
     credits_text = CreditsText.objects.filter(language=language).first()
+    
     if credits_text:
         return HttpResponse(credits_text.text)
     else:
-        return HttpResponse("Credits text not available in the requested language")
+        return HttpResponse("Credits text not available in the requested language", status=404)
     
 def header(request: WSGIRequest):
     language = request.GET.get('lang', 'en')
@@ -100,4 +101,4 @@ def header(request: WSGIRequest):
     if header_text:
         return HttpResponse(header_text.line)
     else:
-        return HttpResponse("Header text not available in the requested language")
+        return HttpResponse("Header text not available in the requested language", status=404)
