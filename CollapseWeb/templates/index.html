@@ -4,49 +4,49 @@
 {% block title %}Home{% endblock %}
 
 {% block additionals %}
-
 {% compress js %}
 <script type="text/javascript" src="/static/js/script.js"></script>
 {% endcompress %}
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700&display=swap">
-
 {% endblock %}
 
 {% block content %}
-<h1>Clients</h1>
-<div class="cards">
-    {% if clients|length == 0 %}
-    <p>No clients available.</p>
-    {% else %}
-
-    {% for client in clients %}
-    {% if client.show_in_loader %}
-    <div class="card" id="client-{{ client.id }}">
-        <h3>{{ client.name }}</h3>
-        <p>{{ client.version }}</p>
-        <a href="https://cdn.collapseloader.org/{{ client.filename }}">Download</a>
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-</div>
-
-<h1>Configs</h1>
-<div class="cards">
-    {% if configs|length == 0 %}
-    <p>No configs available.</p>
-    {% else %}
-    {% for config in configs %}
-    <div class="card" id="config-{{ config.id }}">
-        <p title="{{ config.filename }}">{{ config.filename }}</p>
-        {% if config.server != "-" %}
-        <p title="{{ config.server }}">{{ config.server }}</p>
+<section class="cards-section">
+    <h1>Clients</h1>
+    <div class="cards">
+        {% if clients|length == 0 %}
+        <p>No clients available.</p>
+        {% else %}
+        {% for client in clients %}
+        {% if client.show_in_loader %}
+        <div class="card" id="client-{{ client.id }}">
+            <h3>{{ client.name }}</h3>
+            <p>{{ client.version }}</p>
+            <a href="https://cdn.collapseloader.org/{{ client.filename }}">Download</a>
+        </div>
         {% endif %}
-        <a href="#" onclick="highlightClient(event, '{{ config.client.id }}')">{{ config.client.name }}</a>
-        <a href="/upload/{{ config.file }}">Download</a>
+        {% endfor %}
+        {% endif %}
     </div>
-    {% endfor %}
-    {% endif %}
-</div>
+</section>
+
+<section class="cards-section">
+    <h1>Configs</h1>
+    <div class="cards">
+        {% if configs|length == 0 %}
+        <p>No configs available.</p>
+        {% else %}
+        {% for config in configs %}
+        <div class="card" id="config-{{ config.id }}">
+            <p title="{{ config.filename }}">{{ config.filename }}</p>
+            {% if config.server != "-" %}
+            <p title="{{ config.server }}">{{ config.server }}</p>
+            {% endif %}
+            <a href="#" onclick="highlightClient(event, '{{ config.client.id }}')">{{ config.client.name }}</a>
+            <a href="/upload/{{ config.file }}">Download</a>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</section>
 {% endblock %}

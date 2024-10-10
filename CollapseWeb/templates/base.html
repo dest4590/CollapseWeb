@@ -20,17 +20,20 @@
 </head>
 
 <body>
-    <div class="header-links">
+    <header class="header-links">
         <a href="{% url 'index' %}">Home</a>
         <a href="{% url 'api' %}">API</a>
-        <a href="https://collapseloader.org">Website</a>
+        <a href="https://collapseloader.org" target="_blank">Website</a>
         {% if is_admin %}
         <a href="{% url 'admin:index' %}">Admin</a>
         {% endif %}
-    </div>
+    </header>
     <main>
         {% block content %}{% endblock %}
     </main>
+    <footer>
+        <p>&copy; 2024 CollapseWeb. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>

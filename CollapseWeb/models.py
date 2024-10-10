@@ -3,7 +3,6 @@ from io import BytesIO
 
 from django.db import models
 from django.utils.safestring import mark_safe
-from django.utils.translation import get_language
 from PIL import Image
 
 from Core.settings import MEDIA_ROOT

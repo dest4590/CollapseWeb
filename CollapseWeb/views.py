@@ -21,7 +21,7 @@ def index(request: WSGIRequest):
     })
 
 def api(request: WSGIRequest):
-    return render(request, 'api.html')
+    return render(request, 'api.html', {'is_admin': is_admin(request)})
 
 def analytics_start(request: WSGIRequest):
     if DISCORD_WEBHOOK_START:
