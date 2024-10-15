@@ -14,26 +14,30 @@ def client_pre_save(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Client)
 def client_post_save(sender, instance, created, **kwargs):
-    changes = []
-    
-    if not created:
-        print(f"Client updated: {instance}")
-        pre_save_instance = getattr(instance, '_pre_save_instance', None)
-        if pre_save_instance:
-            for field in instance._meta.fields:
-                field_name = field.name
-                old_value = getattr(pre_save_instance, field_name)
-                new_value = getattr(instance, field_name)
-                if old_value != new_value and field_name != "updated_at":
-                    changes.append((field_name, old_value, new_value))
-            
-            if changes:
-                print("Changes:")
-                for field_name, old_value, new_value in changes:
-                    print(f"{field_name}: {old_value} -> {new_value}")
-
-    send_discord_log(instance, created, changes)
+    if os.getenv('DISCORD_WEBHOOK_MODELS_LOGS'):
+        changes = []
         
+        if not created:
+            print(f"Client updated: {instance}")
+            pre_save_instance = getattr(instance, '_pre_save_instance', None)
+            if pre_save_instance:
+                for field in instance._meta.fields:
+                    field_name = field.name
+                    old_value = getattr(pre_save_instance, field_name)
+                    new_value = getattr(instance, field_name)
+                    if old_value != new_value and field_name != "updated_at":
+                        changes.append((field_name, old_value, new_value))
+                
+                if changes:
+                    print("Changes:")
+                    for field_name, old_value, new_value in changes:
+                        print(f"{field_name}: {old_value} -> {new_value}")
+
+        send_discord_log(instance, created, changes)
+
+    else:
+        print("DISCORD_WEBHOOK_MODELS_LOGS not set")    
+    
 def send_discord_log(client_instance: Client, created: bool = False, changes: list = None):
     if created or (changes and not created):
         webhook = DiscordWebhook(url=os.getenv('DISCORD_WEBHOOK_MODELS_LOGS'))
