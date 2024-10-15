@@ -43,9 +43,8 @@ def send_discord_log(client_instance: Client, created: bool = False, changes: li
         webhook = DiscordWebhook(url=os.getenv('DISCORD_WEBHOOK_MODELS_LOGS'))
         
         if created:
-            embed = DiscordEmbed(title="New client added!", description="", color="902bfb")
-            embed.add_embed_field(name="Name", value=client_instance.name)
-            
+            embed = DiscordEmbed(title=f"New client {client_instance.name} added!", description="", color="902bfb")
+
             for field in client_instance._meta.fields:
                 field_name = field.name
                 
@@ -56,9 +55,8 @@ def send_discord_log(client_instance: Client, created: bool = False, changes: li
                 embed.add_embed_field(name=field_name, value=field_value, inline=True)
             
         else:
-            embed = DiscordEmbed(title="Client updated!", description="", color="902bfb")
-            embed.add_embed_field(name="Name", value=client_instance.name)
-            
+            embed = DiscordEmbed(title=f"Client {client_instance.name} updated, changes: ", description="", color="902bfb")
+
             if changes:
                 for field_name, old_value, new_value in changes:
                     embed.add_embed_field(name=field_name, value=f"{old_value} -> {new_value}", inline=False)
