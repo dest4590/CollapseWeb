@@ -1,42 +1,7 @@
 import os
-from io import BytesIO
 
 from django.db import models
-from django.utils.safestring import mark_safe
-from PIL import Image
 
-from Core.settings import MEDIA_ROOT
-
-
-def optimize_image(image, filename):
-    file_extension = os.path.splitext(os.path.basename(filename))[1]
-
-    if file_extension == '.gif':
-        return image
-
-    img = Image.open(image)
-
-    if img.mode != 'RGB':
-        img = img.convert('RGB')
-    
-    img.thumbnail((512, 512))
-    output = BytesIO()
-    img.save(output, format='WEBP', quality=80)
-    output.seek(0)
-    return output
-
-def image_file(instance, f):
-    if os.path.splitext(os.path.basename(instance.image.path))[1] == '.gif':
-        filename = mark_safe('clients/image/' + instance.name.replace(' ', '_') + '_' + instance.version + '.gif')
-    else:
-        filename = mark_safe('clients/image/' + instance.name.replace(' ', '_') + '_' + instance.version + '.webp')
-        filename = ''.join(c for c in filename if c not in '()<>')
-        
-    if os.path.exists(MEDIA_ROOT + '/' + filename):
-        os.remove(MEDIA_ROOT + '/' + filename)
-        return filename
-    
-    return filename
 
 class Client(models.Model):
     id = models.AutoField(primary_key=True)
