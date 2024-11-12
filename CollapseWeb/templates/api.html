@@ -4,6 +4,9 @@
 {% block title %}API{% endblock %}
 {% block additionals %}
 
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+
 {% compress js %}
 <script type="text/javascript" src="/static/js/api.js"></script>
 {% endcompress %}
@@ -19,16 +22,17 @@
 {% block content %}
 <div class="center">
     <img src="/static/img/collapseweb.svg" alt="CollapseWeb" id="logo">
+    <h3>Available API endpoints:</h3>
+
     <div id="endpoints">
-        <h3>Available API endpoints:</h3>
-        <a href="/api/clients/">clients/</a> - Clients list (used for loader)</br>
-        <a href="/api/fabric_clients/">fabric_clients/</a> - Fabric clients list (used for loader)</br>
-        <a href="/api/configs/">configs/</a> - Config list (used for clients)</br>
-        <a href="/api/messages/">messages/</a> - Messages list (used for alerting in loader)</br>
-        <a href="/api/counter/">counter/</a> - Counter (used for analytics) </br>
-        <a href="/credits?lang=en">credits/</a> - Credits text (used for credits menu in loader)</br>
-        <a href="/header?lang=en">header/</a> - Header text (used for main menu header in loader)</br>
-        <a href="/admin">admin/</a> - Admin panel
+        <a href="/api/clients/" aria-details="Clients list (used for loader)">clients/</a>
+        <a href="/api/fabric_clients/" aria-details="Fabric clients list (used for loader)">fabric_clients/</a>
+        <a href="/api/configs/" aria-details="Config list (used for clients)">configs/</a>
+        <a href="/api/messages/" aria-details="Messages list (used for alerting in loader)">messages/</a>
+        <a href="/api/counter/" aria-details="Counter (used for analytics)">counter/</a>
+        <a href="/credits?lang=en" aria-details="Credits text (used for credits menu in loader)">credits/</a>
+        <a href="/header?lang=en" aria-details="Header text (used for main menu header in loader)">header/</a>
+        <a href="/admin" aria-details="Admin panel">admin/</a>
     </div>
 </div>
 {% endblock %}

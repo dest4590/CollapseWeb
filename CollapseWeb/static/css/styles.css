@@ -103,17 +103,33 @@ h1 {
     height: 40px;
     width: 145px;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .card a:hover {
     background-color: #434c5e;
+    text-decoration: none;
+}
+
+.card a:active {
+    transform: scale(0.9);
 }
 
 .cut-text {
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--gb-1);
+    color: white;
+    text-align: center;
+    padding: 10px;
 }
 
 @keyframes glow {
