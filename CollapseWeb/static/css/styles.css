@@ -54,8 +54,9 @@ h1 {
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    gap: 1rem;
 
     background-color: var(--gb-1);
     border-radius: 10px;
@@ -119,17 +120,6 @@ h1 {
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
-}
-
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--gb-1);
-    color: white;
-    text-align: center;
-    padding: 10px;
 }
 
 @keyframes glow {
