@@ -12,4 +12,4 @@
 * [X] Docker Support
 * [X] Windows/Linux Support 
 
-### Installation [here](https://github.com/dest4590/CollapseLoader/wiki)
+### Installation [here](https://github.com/dest4590/CollapseWeb/wiki)
